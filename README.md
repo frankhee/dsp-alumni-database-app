@@ -1,1 +1,1 @@
-# resonance-project
+# dsp-alumni-database-app
