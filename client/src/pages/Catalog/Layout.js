@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Header from "../../component/ui/Header";
-import ProductCard from "../../component/widgets/ProductCard";
+import AlumniCard from "../../component/widgets/AlumniCard";
 import { makeStyles, Grid, Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Layout({ products, auth, loadProduct, moreProducts }) {
+function Layout({ alumni, auth, loadAlumni, moreAlumni }) {
   const classes = useStyles();
   const columnSize = {
     xs: 12,
@@ -33,20 +33,20 @@ function Layout({ products, auth, loadProduct, moreProducts }) {
     lg: 3,
   };
 
-  function loadMoreProducts() {
-    const loadProductAsync = async () => await loadProduct();
-    loadProductAsync();
+  function loadMoreAlumni() {
+    const loadAlumniAsync = async () => await loadAlumni();
+    loadAlumniAsync();
   };
 
   useEffect(() => {
-    const loadProductAsync = async () => await loadProduct();
-    if (Object.keys(products).length === 0 && auth.isAuthenticated) {
-      loadProductAsync();
+    const loadAlumniAsync = async () => await loadAlumni();
+    if (Object.keys(alumni).length === 0 && auth.isAuthenticated) {
+      loadAlumniAsync();
     }
-  },[auth.isAuthenticated, loadProduct, products])
+  },[auth.isAuthenticated, loadAlumni, alumni])
 
   return (
-    Object.keys(products).length > 0 &&
+    Object.keys(alumni).length > 0 &&
     <Header>
       <div className={classes.pageContainer}>
         <div className={classes.productContainer}>
@@ -59,12 +59,12 @@ function Layout({ products, auth, loadProduct, moreProducts }) {
             }}
           >
             {
-              Array.from(Object.keys(products)).map((key, index) => (
+              Array.from(Object.keys(alumni)).map((key, index) => (
               <Grid key={index} item {...columnSize}>
-                  <ProductCard 
+                  <AlumniCard 
                     key={key} 
                     id={key}
-                    product={products[key]}
+                    alumnus={alumni[key]}
                   />
               </Grid>
               ))
@@ -72,12 +72,12 @@ function Layout({ products, auth, loadProduct, moreProducts }) {
           </Grid>
         </div>
         {
-          moreProducts &&
+          moreAlumni &&
           <div className={classes.loadButtonContainer}>
             <Button 
               variant="outlined" 
               color="primary"
-              onClick={() => loadMoreProducts()}
+              onClick={() => loadMoreAlumni()}
             >
               Load More
             </Button>
@@ -89,10 +89,10 @@ function Layout({ products, auth, loadProduct, moreProducts }) {
 }
 
 Layout.propTypes = {
-  products: PropTypes.object.isRequired,
+  alumni: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  loadProduct: PropTypes.func.isRequired,
-  moreProducts: PropTypes.bool.isRequired
+  loadAlumni: PropTypes.func.isRequired,
+  moreAlumni: PropTypes.bool.isRequired
 };
 
 export default Layout;

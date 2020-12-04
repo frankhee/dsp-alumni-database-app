@@ -46,7 +46,7 @@ function Layout({auth, registerUser, error}) {
 
   useEffect(() => {
     if(auth.isAuthenticated) {
-      history.push("/products/allproducts");
+      history.push("/alumni/allalumni");
     }
   }, [auth.isAuthenticated, history])
 

@@ -4,16 +4,16 @@ const path = require('path')
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 const users = require("./routes/api/users");
-const products = require("./routes/api/products");
+const alumni = require("./routes/api/alumni");
 const app = express();
 require('dotenv').config();
 
 //*********COMMENT OUT FOR DEPLOY*********//
-// const cors = require('cors');
-// app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+const cors = require('cors');
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 //*****************************************//
 
-app.use(express.static(path.join(__dirname, '../client/build')));
+// app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Bodyparser middleware
 app.use(bodyParser.urlencoded({extended: false}));
@@ -25,7 +25,7 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.AIRTABLE_
 
 //API endpoints
 app.use("/api/users", users);
-app.use("/api/products", products);
+app.use("/api/alumni", alumni);
 
 //Listent to port
 const port = process.env.PORT || 5000;

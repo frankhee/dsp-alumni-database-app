@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { userReducer } from './userReducer';
-import { productReducer } from './productReducer';
+import { alumniReducer } from './alumniReducer';
 import { errorReducer } from './errorReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
-  product: productReducer,
+  alumni: alumniReducer,
   error: errorReducer
 });
 

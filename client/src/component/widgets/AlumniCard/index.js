@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import ProductQuickView from "../ProductQuickView";
+import AlumniQuickView from "../AlumniQuickView";
 import {
    makeStyles,
    Box,
@@ -38,7 +38,7 @@ const useStyle = makeStyles(() => ({
   },
 }));
 
-function ProductCard({ id, product }) {
+function AlumniCard({ id, alumnus }) {
   const [isOpen, setIsOpen] = useState(false);
   const classes = useStyle();
 
@@ -54,20 +54,20 @@ function ProductCard({ id, product }) {
     <>
       <Card className={classes.root}>
       <CardActionArea>
-        <CardMedia
+        {/* <CardMedia
           className={classes.media}
-          image={product.Picture[0].url}
+          image={alumnus.Picture[0].url}
           onClick={() => handleOpen()}
-        />
+        /> */}
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2" align='center'>
-            {product.Name}
+            {alumnus["First Name"] + " " + alumnus["Last Name"]}
           </Typography>
         </CardContent>
       </CardActionArea>
       <div className={classes.vendorName}>
         <Typography color="textSecondary" component="p">
-          {product.Vendor}
+          {alumnus.Employer}
         </Typography>
       </div>
     </Card>
@@ -83,7 +83,7 @@ function ProductCard({ id, product }) {
       >
         <Fade in={isOpen}>
           <Box style={{outline: 'none'}}>
-            <ProductQuickView id={id} product={product}/>
+            <AlumniQuickView id={id} alumnus={alumnus}/>
           </Box>
         </Fade>
       </Modal>
@@ -91,9 +91,9 @@ function ProductCard({ id, product }) {
   )
 }
 
-ProductCard.propTypes = {
+AlumniCard.propTypes = {
   id: PropTypes.string.isRequired,
-  product: PropTypes.object.isRequired
+  alumnus: PropTypes.object.isRequired
 };
 
-export default ProductCard;
+export default AlumniCard;

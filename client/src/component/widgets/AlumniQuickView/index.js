@@ -6,7 +6,7 @@ import {
   Button,
   Typography,
 } from '@material-ui/core';
-import ProductServices from '../../../services/api/ProductServices';
+import AlumniServices from '../../../services/api/AlumniServices';
 
 const useStyle = makeStyles((theme) => ({
   viewContainer: {
@@ -47,27 +47,27 @@ const useStyle = makeStyles((theme) => ({
   }
 }));
 
-function ProductQuickView({ id, product }) {
+function AlumniQuickView({ id, alumnus }) {
   const classes = useStyle();
 
   async function sendInfo() {
     const userKey = {
       id: id
     }
-    const response = await ProductServices.getProduct(userKey);
+    const response = await AlumniServices.getProduct(userKey);
     alert(response.message)
   }
 
   return (
     <div className={classes.viewContainer}>
       <div className={classes.leftContainer}>
-        <Carousel 
+        {/* <Carousel 
           className={classes.imgSlider}
           autoPlay={false}
           indicators={false}
         >
           {
-            product.Picture.map((pic) => (
+            alumnus.Picture.map((pic) => (
               <div 
                 style={{
                   width: '400px',
@@ -82,18 +82,18 @@ function ProductQuickView({ id, product }) {
               />
             ))
           }
-        </Carousel>
+        </Carousel> */}
       </div>
       <div className={classes.rightContainer}>
         <div className={classes.infoContainer}>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
-            {product.Vendor}
+            {alumnus.Country}
           </Typography>
           <Typography variant="h5" component="h2">
-            {product.Name}
+            {alumnus.State}
           </Typography>
           <Typography variant="h5" component="h2">
-            ${product["Unit Cost"]}
+            ${alumnus.City}
           </Typography>
           <Button 
             variant='outlined' 
@@ -108,10 +108,10 @@ function ProductQuickView({ id, product }) {
   )
 }
 
-ProductQuickView.propTypes = {
+AlumniQuickView.propTypes = {
   id: PropTypes.string.isRequired,
-  product: PropTypes.object.isRequired
+  alumnus: PropTypes.object.isRequired
 }
 
-export default ProductQuickView;
+export default AlumniQuickView;
 

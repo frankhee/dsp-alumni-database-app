@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
-import { loadProduct } from '../../store/actions/productActions';
+import { loadAlumni } from '../../store/actions/alumniActions';
 import Layout from './Layout';
 
 const mapStateToProps = (state) => ({
-  products: state.product.products,
+  alumni: state.alumni.alumni,
   auth: state.user,
-  moreProducts: state.product.moreProducts
+  moreAlumni: state.alumni.moreAlumni
 });
 
 const mapDispatchToProps = {
-  loadProduct: loadProduct
+  loadAlumni: loadAlumni
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);

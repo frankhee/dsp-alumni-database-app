@@ -77,7 +77,7 @@ function Header({ children, logoutUser }) {
           noWrap 
           className={classes.title}
         >
-            Resonance Catalog
+            DSP Alumni Database
         </Typography>
         <IconButton
           aria-label="access-account"

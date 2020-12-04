@@ -20,7 +20,7 @@ function AppRoutes() {
         <Route exact path="/" component={RedirectPage}/>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/register" component={Register}/>
-        <PrivateRoute exact path="/products/allproducts" component={Catalog}/>
+        <PrivateRoute exact path="/alumni/allalumni" component={Catalog}/>
       </Switch>
     </div>
   )
