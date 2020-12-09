@@ -2,8 +2,7 @@ const axios = require("axios");
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 
-//Define the number of records returned each request and max records that can be returned each request
-const max = 100;
+//Define the number of records returned each request
 const pageSize = 16;
 
 
@@ -55,9 +54,9 @@ async function fetchAlumniPage(offset = null) {
   try {
     let response;
     if(offset) {
-      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?fields%5B%5D=First+Name&fields%5B%5D=Last+Name&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=Information+Last+Updated&fields%5B%5D=LinkedIn+Link&fields%5B%5D=Employer&maxRecords=${max}&pageSize=${pageSize}&offset=${offset}`);
+      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?sort%5B0%5D%5Bfield%5D=Graduation+Date&sort%5B0%5D%5Bdirection%5D=desc&fields%5B%5D=First+Name&fields%5B%5D=Graduation+Date&fields%5B%5D=Last+Name&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=Information+Last+Updated&fields%5B%5D=LinkedIn&fields%5B%5D=Employer&pageSize=${pageSize}&offset=${offset}`);
     } else {
-      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?fields%5B%5D=First+Name&fields%5B%5D=Last+Name&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=Information+Last+Updated&fields%5B%5D=LinkedIn+Link&fields%5B%5D=Employer&maxRecords=${max}&pageSize=${pageSize}`);
+      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?sort%5B0%5D%5Bfield%5D=Graduation+Date&sort%5B0%5D%5Bdirection%5D=desc&fields%5B%5D=First+Name&fields%5B%5D=Last+Name&fields%5B%5D=Graduation+Date&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=Information+Last+Updated&fields%5B%5D=LinkedIn&fields%5B%5D=Employer&pageSize=${pageSize}`);
     }
     const newOffset = response.data.offset;
     return [response.data.records, newOffset];
@@ -66,15 +65,21 @@ async function fetchAlumniPage(offset = null) {
   }
 }
 
-//Retrieve information on a specific product based on product ID
-// async function getProductInfo(id) {
-//   try {
-//     const response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Furniture/${id}`);
-//     return response;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+//Fetch alumni information based on search input
+async function searchAlumniPage(offset = null) {
+  try {
+    let response;
+    if(offset) {
+      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?fields%5B%5D=First+Name&fields%5B%5D=Last+Name&fields%5B%5D=Graduation+Date&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Employer&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=LinkedIn&fields%5B%5D=Information+Last+Updated&filterByFormula=OR(Employer+%3D+''%2C+City+%3D+'%3D'%2C+First+Name+%3D+''%2C+Last+Name+%3D+''%2C+Graduation+Date+%3D+''%2C+State+%3D+''%2C+)&pageSize=16&sort%5B0%5D%5Bfield%5D=Graduation+Date&sort%5B0%5D%5Bdirection%5D=desc&offset=${offset}`);
+    } else {
+      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?fields%5B%5D=First+Name&fields%5B%5D=Last+Name&fields%5B%5D=Graduation+Date&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Employer&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=LinkedIn&fields%5B%5D=Information+Last+Updated&filterByFormula=OR(Employer+%3D+''%2C+City+%3D+'%3D'%2C+First+Name+%3D+''%2C+Last+Name+%3D+''%2C+Graduation+Date+%3D+''%2C+State+%3D+''%2C+)&pageSize=16&sort%5B0%5D%5Bfield%5D=Graduation+Date&sort%5B0%5D%5Bdirection%5D=desc`);
+    }
+    const newOffset = response.data.offset;
+    return [response.data.records, newOffset];
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 module.exports = {
   handleGetAlumni,

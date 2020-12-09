@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Carousel from 'react-material-ui-carousel'
 import {
   makeStyles,
-  Button,
   Typography,
 } from '@material-ui/core';
-import AlumniServices from '../../../services/api/AlumniServices';
+import { 
+  WorkOutlineOutlined,
+  HomeOutlined,
+  SchoolOutlined,
+  EmailOutlined,
+  LanguageOutlined 
+} from '@material-ui/icons';
 
 const useStyle = makeStyles((theme) => ({
   viewContainer: {
@@ -18,26 +22,60 @@ const useStyle = makeStyles((theme) => ({
     flexDirection: 'row'
   },
   leftContainer: {
-    width: '50%',
-    height: '100%'
-  },
-  rightContainer: {
-    width: '50%',
+    width: '30%',
     height: '100%',
+    borderTopLeftRadius: '25px',
+    borderBottomLeftRadius: '25px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    borderRight: '2px solid #ED2939',
+    backgroundColor: '#ED2939'
   },
-  imgSlider: {
+  logo: {
+    width: '90%',
+    objectFit: 'cover',
+  },
+  rightContainer: {
+    width: '70%',
+    height: '100%',
+    borderTopRightRadius: '25px',
+    borderBottomRightRadius: '25px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  topText: {
+    height: '50%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around'
+  },
+  bottomText: {
+    height: '50%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    color: 'white'
+  },
+  divider: {
+    border: '1px solid #ED2939',
+    marginRight: 0,
+    marginLeft: 0
+  },
+  icon: {
+    fontSize: 30,
+    marginRight: "10px",
+  },
+  iconInfo: {
+    display: 'flex',
+    flexDirection: 'row',
     width: '100%',
-    height: '100%'
-  },
-  title: {
-    fontSize: 14,
   },
   infoContainer: {
-    borderLeft: '2px solid black',
     padding: '30px',
     marginBottom: '10px',
     height: '50%',
@@ -49,59 +87,80 @@ const useStyle = makeStyles((theme) => ({
 
 function AlumniQuickView({ id, alumnus }) {
   const classes = useStyle();
-
-  async function sendInfo() {
-    const userKey = {
-      id: id
-    }
-    const response = await AlumniServices.getProduct(userKey);
-    alert(response.message)
-  }
+  const linkedInExist = alumnus.LinkedIn !== "N/A";
 
   return (
     <div className={classes.viewContainer}>
       <div className={classes.leftContainer}>
-        {/* <Carousel 
-          className={classes.imgSlider}
-          autoPlay={false}
-          indicators={false}
-        >
-          {
-            alumnus.Picture.map((pic) => (
-              <div 
-                style={{
-                  width: '400px',
-                  height: '650px',
-                  margin: '10px',
-                  backgroundImage: `url(${pic.url})`,
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: '300px 300px'
-                }}
-                key={pic.id}
-              />
-            ))
-          }
-        </Carousel> */}
+        <img 
+          src="https://lh3.googleusercontent.com/proxy/K9fJb8J7O47gDUuDIiTReBnweYCOLhImnKFo36S1-NwGB1k_wJVpeyDYSpUt4XxV0meAJWag8cYwNHvTp8MXwd8UkKuJVYp_Wwgej0MDDJIap2mtbQ"
+          className={classes.logo}
+          alt="logo"
+        />
       </div>
       <div className={classes.rightContainer}>
         <div className={classes.infoContainer}>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-            {alumnus.Country}
-          </Typography>
-          <Typography variant="h5" component="h2">
-            {alumnus.State}
-          </Typography>
-          <Typography variant="h5" component="h2">
-            ${alumnus.City}
-          </Typography>
-          <Button 
-            variant='outlined' 
-            color='primary'
-            onClick={() => sendInfo()}
-          >
-            Send Product Information to Your Email
-          </Button>
+          <div className={classes.topText}>
+            <Typography variant="h3">
+              {alumnus["First Name"] + " " + alumnus["Last Name"]}
+            </Typography>
+            <Typography 
+              variant="h5" 
+              className={classes.iconInfo}
+            >
+              <WorkOutlineOutlined className={classes.icon}/>
+              {alumnus.Employer}
+            </Typography>
+            <hr className={classes.divider}/>
+          </div>
+          <div className={classes.bottomText}>
+            <Typography 
+              variant="h5" 
+              component="h2" 
+              color="textSecondary" 
+              className={classes.iconInfo}
+            >
+              <HomeOutlined className={classes.icon}/>
+              {alumnus.City + ", " + alumnus.State}
+            </Typography>
+            <Typography 
+              variant="h5" 
+              component="h2" 
+              color="textSecondary" 
+              className={classes.iconInfo}
+            >
+              <SchoolOutlined className={classes.icon}/>
+              {alumnus["Graduation Date"]}
+            </Typography>
+            <Typography 
+              variant="h5" 
+              component="h2" 
+              color="textSecondary" 
+              className={classes.iconInfo}
+            >
+              <EmailOutlined className={classes.icon}/>
+              {alumnus.Email}
+            </Typography>
+            {
+              linkedInExist &&
+              <Typography 
+                variant="h5" 
+                component="h2" 
+                color="textSecondary" 
+                className={classes.iconInfo}
+              >
+                <LanguageOutlined className={classes.icon}/>
+                <a 
+                  href={alumnus.LinkedIn} 
+                  style={{color: 'inherit'}} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                </a>
+              </Typography>
+            }
+          </div>
         </div>
       </div>
     </div>

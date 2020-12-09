@@ -4,10 +4,6 @@ import AlumniQuickView from "../AlumniQuickView";
 import {
    makeStyles,
    Box,
-   Card,
-   CardActionArea,
-   CardContent,
-   CardMedia,
    Typography,
    Modal,
    Backdrop,
@@ -16,20 +12,20 @@ import {
  
 const useStyle = makeStyles(() => ({
   root: {
-    margin: 30,
-    maxWidth: 345,
-    height: 435,
+    minWidth: 275,
+    height: 200,
+    backgroundColor: '#3a4660',
+    color: '#F2F3F0',
+    borderRadius: '10px',
+    cursor: 'pointer'
+  },
+  basicContent: {
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    position: 'relative'
-  },
-  media: {
-    height: 300,
-  },
-  vendorName: {
-    position: 'absolute',
-    bottom: 8,
-    left: 8
+    justifyContent: 'space-around',
+    paddingLeft: '20px',
+    paddingRight: '20px'
   },
   modal: {
     display: 'flex',
@@ -52,25 +48,22 @@ function AlumniCard({ id, alumnus }) {
 
   return (
     <>
-      <Card className={classes.root}>
-      <CardActionArea>
-        {/* <CardMedia
-          className={classes.media}
-          image={alumnus.Picture[0].url}
-          onClick={() => handleOpen()}
-        /> */}
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2" align='center'>
+      <div 
+        className={classes.root}
+        onClick={() => handleOpen()}
+      >
+        <div className={classes.basicContent}>
+          <Typography variant="h5" component="h2">
             {alumnus["First Name"] + " " + alumnus["Last Name"]}
           </Typography>
-        </CardContent>
-      </CardActionArea>
-      <div className={classes.vendorName}>
-        <Typography color="textSecondary" component="p">
-          {alumnus.Employer}
-        </Typography>
+          <Typography>
+            {"Employer: "+ alumnus.Employer}
+          </Typography>
+          <Typography>
+            {"Graduate Year: "+ alumnus["Graduation Date"]}
+          </Typography>
+        </div>
       </div>
-    </Card>
     <Modal
       className={classes.modal}
       open={isOpen}
@@ -80,13 +73,13 @@ function AlumniCard({ id, alumnus }) {
       BackdropProps={{
         timeout: 500,
       }}
-      >
-        <Fade in={isOpen}>
-          <Box style={{outline: 'none'}}>
-            <AlumniQuickView id={id} alumnus={alumnus}/>
-          </Box>
-        </Fade>
-      </Modal>
+    >
+      <Fade in={isOpen}>
+        <Box style={{outline: 'none'}}>
+          <AlumniQuickView id={id} alumnus={alumnus}/>
+        </Box>
+      </Fade>
+    </Modal>
   </>
   )
 }

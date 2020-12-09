@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Header from "../../component/ui/Header";
+import SearchBar from "../../component/widgets/SearchBar"
 import AlumniCard from "../../component/widgets/AlumniCard";
 import { makeStyles, Grid, Button } from '@material-ui/core';
 
@@ -38,6 +39,10 @@ function Layout({ alumni, auth, loadAlumni, moreAlumni }) {
     loadAlumniAsync();
   };
 
+  function handleSearch(input) {
+    
+  };
+
   useEffect(() => {
     const loadAlumniAsync = async () => await loadAlumni();
     if (Object.keys(alumni).length === 0 && auth.isAuthenticated) {
@@ -58,6 +63,7 @@ function Layout({ alumni, auth, loadAlumni, moreAlumni }) {
               margin: 0,
             }}
           >
+            <SearchBar handleSearch={handleSearch}/>
             {
               Array.from(Object.keys(alumni)).map((key, index) => (
               <Grid key={index} item {...columnSize}>
