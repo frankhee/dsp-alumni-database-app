@@ -3,21 +3,39 @@ import AlumniServices from '../../services/api/AlumniServices';
 export const LOAD_ALUMNI_START = "LOAD_ALUMNI_START";
 export const LOAD_ALUMNI_SUCCESS = "LOAD_ALUMNI_SUCCESS";
 export const MOER_ALUMNI_TO_LOAD = "MOER_ALUMNI_TO_LOAD";
+export const CLEAR_ALUMNI_INFO = "CLEAR_ALUMNI_INFO";
+export const REQUEST_IS_SEARCH = "REQUEST_IS_SEARCH";
 
-//Load product catalog
-export const loadAlumni = () => {
+//Load all alumni or specified alumni
+export const loadAlumni = (input = null) => {
   return function(dispatch) {
     dispatch(loadAlumniStart())
-    return AlumniServices.getAlumni()
-      .then((result) => {
-        dispatch(moreAlumniToLoad(result.moreAlumni))
-        for(let alumnus of result.alumni) {
-          dispatch(loadAlumniSuccess(alumnus))
-        }
-      })
-      .catch((err) => {
-        throw err;
-      }) 
+    if(input) {
+      dispatch(requestIsSearch(true))
+      dispatch(clearAlumniInfo())
+      return AlumniServices.searchAlumni(input)
+        .then((result) => {
+          dispatch(moreAlumniToLoad(result.moreAlumni))
+          for(let alumnus of result.alumni) {
+            dispatch(loadAlumniSuccess(alumnus))
+          }
+        })
+        .catch((err) => {
+          throw err;
+        }) 
+    } else {
+      dispatch(requestIsSearch(false))
+      return AlumniServices.getAlumni()
+        .then((result) => {
+          dispatch(moreAlumniToLoad(result.moreAlumni))
+          for(let alumnus of result.alumni) {
+            dispatch(loadAlumniSuccess(alumnus))
+          }
+        })
+        .catch((err) => {
+          throw err;
+        }) 
+    }
   }
 };
 
@@ -36,6 +54,19 @@ export const loadAlumniSuccess = (result) => {
 export const moreAlumniToLoad = (result) => {
   return {
     type: MOER_ALUMNI_TO_LOAD,
+    payload: result
+  };
+};
+
+export const clearAlumniInfo = () => {
+  return {
+    type: CLEAR_ALUMNI_INFO,
+  }
+};
+
+export const requestIsSearch = (result) => {
+  return {
+    type: REQUEST_IS_SEARCH,
     payload: result
   };
 };

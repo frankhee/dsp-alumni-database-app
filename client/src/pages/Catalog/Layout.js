@@ -25,7 +25,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Layout({ alumni, auth, loadAlumni, moreAlumni }) {
+function Layout({ 
+  alumni, 
+  auth, 
+  loadAlumni, 
+  moreAlumni, 
+  isSearch 
+}) {
   const classes = useStyles();
   const columnSize = {
     xs: 12,
@@ -40,15 +46,20 @@ function Layout({ alumni, auth, loadAlumni, moreAlumni }) {
   };
 
   function handleSearch(input) {
-    
+    const userInput = {
+      input: input
+    }
+    const loadAlumniAsync = async () => await loadAlumni(userInput);
+    loadAlumniAsync();
   };
 
   useEffect(() => {
     const loadAlumniAsync = async () => await loadAlumni();
-    if (Object.keys(alumni).length === 0 && auth.isAuthenticated) {
+    if (Object.keys(alumni).length === 0 && auth.isAuthenticated && !isSearch) {
+      console.log("UseEffect Ran!")
       loadAlumniAsync();
     }
-  },[auth.isAuthenticated, loadAlumni, alumni])
+  },[auth.isAuthenticated, loadAlumni, alumni, isSearch])
 
   return (
     Object.keys(alumni).length > 0 &&
@@ -98,7 +109,8 @@ Layout.propTypes = {
   alumni: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   loadAlumni: PropTypes.func.isRequired,
-  moreAlumni: PropTypes.bool.isRequired
+  moreAlumni: PropTypes.bool.isRequired,
+  isSearch: PropTypes.bool.isRequired
 };
 
 export default Layout;

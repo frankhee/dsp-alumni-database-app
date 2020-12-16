@@ -11,6 +11,7 @@ import {
   EmailOutlined,
   LanguageOutlined 
 } from '@material-ui/icons';
+import dspLogo from '../../../asset/DSP_Logo.png';
 
 const useStyle = makeStyles((theme) => ({
   viewContainer: {
@@ -93,7 +94,7 @@ function AlumniQuickView({ id, alumnus }) {
     <div className={classes.viewContainer}>
       <div className={classes.leftContainer}>
         <img 
-          src="https://lh3.googleusercontent.com/proxy/K9fJb8J7O47gDUuDIiTReBnweYCOLhImnKFo36S1-NwGB1k_wJVpeyDYSpUt4XxV0meAJWag8cYwNHvTp8MXwd8UkKuJVYp_Wwgej0MDDJIap2mtbQ"
+          src={dspLogo}
           className={classes.logo}
           alt="logo"
         />
@@ -102,7 +103,7 @@ function AlumniQuickView({ id, alumnus }) {
         <div className={classes.infoContainer}>
           <div className={classes.topText}>
             <Typography variant="h3">
-              {alumnus["First Name"] + " " + alumnus["Last Name"]}
+              {alumnus.First_Name + " " + alumnus.Last_Name}
             </Typography>
             <Typography 
               variant="h5" 
@@ -130,7 +131,7 @@ function AlumniQuickView({ id, alumnus }) {
               className={classes.iconInfo}
             >
               <SchoolOutlined className={classes.icon}/>
-              {alumnus["Graduation Date"]}
+              {alumnus.Graduation_Date}
             </Typography>
             <Typography 
               variant="h5" 

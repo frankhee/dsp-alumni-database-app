@@ -5,7 +5,8 @@ import Layout from './Layout';
 const mapStateToProps = (state) => ({
   alumni: state.alumni.alumni,
   auth: state.user,
-  moreAlumni: state.alumni.moreAlumni
+  moreAlumni: state.alumni.moreAlumni,
+  isSearch: state.alumni.isSearch
 });
 
 const mapDispatchToProps = {

@@ -1,6 +1,6 @@
 import HttpRequest from './HttpRequest';
 
-//Request to load product catalog
+//GET request to load all alumni info
 function getAlumni() {
   return HttpRequest({
     url: `/api/alumni/allalumni`,
@@ -8,18 +8,18 @@ function getAlumni() {
   });
 };
 
-//Request to send additional product information to user
-// function getProduct(id) {
-//   return HttpRequest({
-//     url: `/api/products/product`,
-//     method: `POST`,
-//     data: id
-//   });
-// };
+//POST request to load specified alumni info
+function searchAlumni(input) {
+  return HttpRequest({
+    url: '/api/alumni/searchalumni',
+    method: 'POST',
+    data: input
+  })
+}
 
 const AlumniServices = {
   getAlumni,
-  // getProduct
+  searchAlumni
 };
 
 export default AlumniServices;

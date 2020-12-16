@@ -54,13 +54,13 @@ function AlumniCard({ id, alumnus }) {
       >
         <div className={classes.basicContent}>
           <Typography variant="h5" component="h2">
-            {alumnus["First Name"] + " " + alumnus["Last Name"]}
+            {alumnus.First_Name + " " + alumnus.Last_Name}
           </Typography>
           <Typography>
             {"Employer: "+ alumnus.Employer}
           </Typography>
           <Typography>
-            {"Graduate Year: "+ alumnus["Graduation Date"]}
+            {"Graduate Year: "+ alumnus.Graduation_Date}
           </Typography>
         </div>
       </div>

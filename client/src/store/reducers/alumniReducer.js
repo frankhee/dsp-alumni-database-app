@@ -1,13 +1,16 @@
 import { 
   LOAD_ALUMNI_START, 
   LOAD_ALUMNI_SUCCESS,
-  MOER_ALUMNI_TO_LOAD 
+  MOER_ALUMNI_TO_LOAD,
+  CLEAR_ALUMNI_INFO,
+  REQUEST_IS_SEARCH 
 } from "../actions/alumniActions";
 
 const initialState = {
   alumni: {},
   loading: true,
   moreAlumni: true,
+  isSearch: false,
 };
 
 export function alumniReducer(state = initialState, action) {
@@ -29,6 +32,16 @@ export function alumniReducer(state = initialState, action) {
           ...state,
           moreAlumni: action.payload
         };
+      case CLEAR_ALUMNI_INFO:
+        return Object.assign({}, state, {
+          ...state,
+          alumni: {}
+        });
+        case REQUEST_IS_SEARCH:
+          return {
+            ...state,
+            isSearch: action.payload
+          };
     default:
       return state;
   }
