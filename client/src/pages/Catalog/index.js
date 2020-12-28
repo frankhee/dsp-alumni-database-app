@@ -6,7 +6,8 @@ const mapStateToProps = (state) => ({
   alumni: state.alumni.alumni,
   auth: state.user,
   moreAlumni: state.alumni.moreAlumni,
-  isSearch: state.alumni.isSearch
+  isSearch: state.alumni.isSearch,
+  isValidSearch: state.alumni.isValidSearch
 });
 
 const mapDispatchToProps = {

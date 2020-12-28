@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import Header from "../../component/ui/Header";
 import SearchBar from "../../component/widgets/SearchBar"
 import AlumniCard from "../../component/widgets/AlumniCard";
-import { makeStyles, Grid, Button } from '@material-ui/core';
+import { makeStyles, Grid, Button, Typography } from '@material-ui/core';
+import { IceCream } from 'react-kawaii';
 
 const useStyles = makeStyles((theme) => ({
   productContainer: {
@@ -23,6 +24,19 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     marginBottom: 20
   },
+  searchFailContainer: {
+    width: "100%",
+    height: "100%",
+    marginTop: "50px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignContent: "center"
+  },
+  searchFailSVG: {
+    display: "block",
+    margin: "auto"
+  }
 }));
 
 function Layout({ 
@@ -30,7 +44,8 @@ function Layout({
   auth, 
   loadAlumni, 
   moreAlumni, 
-  isSearch 
+  isSearch,
+  isValidSearch 
 }) {
   const classes = useStyles();
   const columnSize = {
@@ -56,50 +71,61 @@ function Layout({
   useEffect(() => {
     const loadAlumniAsync = async () => await loadAlumni();
     if (Object.keys(alumni).length === 0 && auth.isAuthenticated && !isSearch) {
-      console.log("UseEffect Ran!")
       loadAlumniAsync();
     }
   },[auth.isAuthenticated, loadAlumni, alumni, isSearch])
 
   return (
-    Object.keys(alumni).length > 0 &&
     <Header>
       <div className={classes.pageContainer}>
-        <div className={classes.productContainer}>
-          <Grid
-            container
-            spacing={10}
-            style={{
-              width: "100%",
-              margin: 0,
-            }}
-          >
-            <SearchBar handleSearch={handleSearch}/>
-            {
-              Array.from(Object.keys(alumni)).map((key, index) => (
-              <Grid key={index} item {...columnSize}>
-                  <AlumniCard 
-                    key={key} 
-                    id={key}
-                    alumnus={alumni[key]}
-                  />
+        <SearchBar handleSearch={handleSearch}/>
+      {
+        isValidSearch ? 
+          Object.keys(alumni).length > 0 &&
+          <React.Fragment>
+            <div className={classes.productContainer}>
+              <Grid
+                container
+                spacing={10}
+                style={{
+                  width: "100%",
+                  margin: 0,
+                }}
+              >
+                {
+                  Array.from(Object.keys(alumni)).map((key, index) => (
+                  <Grid key={index} item {...columnSize}>
+                      <AlumniCard 
+                        key={key} 
+                        id={key}
+                        alumnus={alumni[key]}
+                      />
+                  </Grid>
+                  ))
+                }
               </Grid>
-              ))
+            </div>
+            {
+              moreAlumni &&
+              <div className={classes.loadButtonContainer}>
+                <Button 
+                  variant="outlined" 
+                  color="primary"
+                  onClick={() => loadMoreAlumni()}
+                >
+                  Load More
+                </Button>
+              </div>
             }
-          </Grid>
-        </div>
-        {
-          moreAlumni &&
-          <div className={classes.loadButtonContainer}>
-            <Button 
-              variant="outlined" 
-              color="primary"
-              onClick={() => loadMoreAlumni()}
-            >
-              Load More
-            </Button>
+          </React.Fragment>   
+            :
+          <div className={classes.searchFailContainer}>
+            <IceCream size={300} mood="sad" color="#FDA7DC" className={classes.searchFailSVG}/>
+            <Typography variant="h3" align="center">
+              No Result Found, Try Again!
+            </Typography>
           </div>
-        }
+      }
       </div>
     </Header>
   );
@@ -110,7 +136,8 @@ Layout.propTypes = {
   auth: PropTypes.object.isRequired,
   loadAlumni: PropTypes.func.isRequired,
   moreAlumni: PropTypes.bool.isRequired,
-  isSearch: PropTypes.bool.isRequired
+  isSearch: PropTypes.bool.isRequired,
+  isValidSearch: PropTypes.bool.isRequired
 };
 
 export default Layout;

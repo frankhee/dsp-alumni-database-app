@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "react-kawaii": "^0.17.0",
     "redux-immutable-state-invariant": "^2.1.0"
   }
 }

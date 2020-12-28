@@ -3,7 +3,8 @@ import {
   LOAD_ALUMNI_SUCCESS,
   MOER_ALUMNI_TO_LOAD,
   CLEAR_ALUMNI_INFO,
-  REQUEST_IS_SEARCH 
+  REQUEST_IS_SEARCH,
+  IS_VALID_SEARCH 
 } from "../actions/alumniActions";
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   loading: true,
   moreAlumni: true,
   isSearch: false,
+  isValidSearch: true
 };
 
 export function alumniReducer(state = initialState, action) {
@@ -42,6 +44,11 @@ export function alumniReducer(state = initialState, action) {
             ...state,
             isSearch: action.payload
           };
+          case IS_VALID_SEARCH:
+            return {
+              ...state,
+              isValidSearch: action.payload
+            };
     default:
       return state;
   }

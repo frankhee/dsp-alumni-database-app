@@ -53,7 +53,8 @@ async function getAlumniPage(req, res, offset = null, searchOffset = null, searc
     }
   }
 
-  //Set offset value in cookie
+  //Set offset value and if search is valid boolean in cookie
+  let isValidSearch = alumni.length === 0 ? false : true;
   if(newOffset) {
     res.cookie('offset', newOffset);
   } else if(newSearchOffset) {
@@ -63,7 +64,7 @@ async function getAlumniPage(req, res, offset = null, searchOffset = null, searc
     res.clearCookie("searchOffset")
     moreAlumni = false;
   }
-  res.json({alumni, moreAlumni});
+  res.json({alumni, moreAlumni, isValidSearch});
 }
 
 //Fetch product information based on offset
