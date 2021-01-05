@@ -53,7 +53,7 @@ function Layout({auth, error, loginUser}) {
 
   useEffect(() => {
     if(auth.isAuthenticated) {
-      history.push("/alumni/allalumni");
+      history.push("/home");
     }
   }, [auth.isAuthenticated, history])
 

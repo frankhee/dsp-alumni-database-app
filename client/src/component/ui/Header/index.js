@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from '../../../store/actions/userActions'
 import { makeStyles } from '@material-ui/core/styles';
@@ -71,14 +72,20 @@ function Header({ children, logoutUser }) {
 
   return (
     <div className={classes.pageContainer}>
-      <div className={classes.headerBarContainer}> 
-        <Typography 
-          variant="h4" 
-          noWrap 
+      <div className={classes.headerBarContainer}>
+        <NavLink
+          style={{ textDecoration: 'none', color: 'white' }}
+          exact
+          to="/home"
           className={classes.title}
         >
+          <Typography 
+            variant="h4" 
+            noWrap 
+          >
             DSP Alumni Database
-        </Typography>
+          </Typography>
+        </NavLink>
         <IconButton
           aria-label="access-account"
           onClick={(event) => handleClick(event)}

@@ -16,7 +16,8 @@ const useStyles = makeStyles(() => ({
     height: '50px',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: "25px"
   },
   searchBar: {
     width: '80%'

@@ -10,8 +10,8 @@ const useStyle = makeStyles(() => ({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    width: "100%",
-    height: "100%",
+    width: "100vw",
+    height: "100vh",
   },
 }));
 

@@ -7,15 +7,15 @@ import { makeStyles, Grid, Button, Typography } from '@material-ui/core';
 import { IceCream } from 'react-kawaii';
 
 const useStyles = makeStyles((theme) => ({
+  pageContainer: {
+    width: "100%",
+    height: "100%",
+  },
   productContainer: {
     width: "100%",
     height: "100%",
     display: "flex",
     flexDirection: "row",
-  },
-  pageContainer: {
-    width: "100%",
-    height: "100%",
   },
   loadButtonContainer: {
     display: "flex",

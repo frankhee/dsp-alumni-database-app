@@ -23,7 +23,7 @@ function AuthHandler({ actions, auth }) {
         // Logout user
         actions.logoutUser();
         // Redirect to login
-        window.location.href = "./#/login";
+        window.location.href = "./login";
       }
     }
   }, [actions, auth.isAuthenticated])
