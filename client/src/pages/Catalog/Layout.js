@@ -89,6 +89,7 @@ function Layout({
                 spacing={10}
                 style={{
                   width: "100%",
+                  height: "100%",
                   margin: 0,
                 }}
               >

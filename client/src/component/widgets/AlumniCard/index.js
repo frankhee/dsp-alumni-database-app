@@ -14,10 +14,16 @@ const useStyle = makeStyles(() => ({
   root: {
     minWidth: 275,
     height: 200,
-    backgroundColor: '#3a4660',
-    color: '#F2F3F0',
+    backgroundColor: 'white',
+    color: 'black',
     borderRadius: '10px',
-    cursor: 'pointer'
+    border: '5px solid #ED2939',
+    cursor: 'pointer',
+    transition: "box-shadow .5s, transform .5s",
+    "&:hover": {
+      boxShadow: "0 0 80px rgba(33,33,33,.2)",
+      transform: "scale(1.1)"
+    },
   },
   basicContent: {
     height: '100%',
@@ -26,6 +32,20 @@ const useStyle = makeStyles(() => ({
     justifyContent: 'space-around',
     paddingLeft: '20px',
     paddingRight: '20px'
+  },
+  topLeftCard: {
+    width: '100%',
+    height: '30%',
+    display: "flex",
+    justifyContent: "flex-start",
+    marginTop: 15
+  },
+  bottomLeftCard: {
+    width: '100%',
+    height: '70%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
   },
   modal: {
     display: 'flex',
@@ -53,15 +73,19 @@ function AlumniCard({ id, alumnus }) {
         onClick={() => handleOpen()}
       >
         <div className={classes.basicContent}>
-          <Typography variant="h5" component="h2">
-            {alumnus.First_Name + " " + alumnus.Last_Name}
-          </Typography>
-          <Typography>
-            {"Employer: "+ alumnus.Employer}
-          </Typography>
-          <Typography>
-            {"Graduate Year: "+ alumnus.Graduation_Date}
-          </Typography>
+          <div className={classes.topLeftCard}>
+            <Typography style={{fontSize: 35, fontWeight: "bold"}}>
+              {alumnus.First_Name + " " + alumnus.Last_Name}
+            </Typography>
+          </div>
+          <div className={classes.bottomLeftCard}>
+            <Typography style={{fontSize: 25}}>
+              {alumnus.Employer}
+            </Typography>
+            <Typography style={{fontSize: 25}}>
+              {"Class of "+ alumnus.Graduation_Date}
+            </Typography>
+          </div>
         </div>
       </div>
     <Modal

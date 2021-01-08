@@ -6,8 +6,8 @@ import Header from "../../component/ui/Header";
 
 const useStyles = makeStyles((theme) => ({
   pageContainer: {
-    height: "100%",
-    width: "100%",
+    height: "100vh",
+    width: "100vw",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -67,7 +67,7 @@ function Layout() {
             to="/alumni/allalumni"
           >
             <div className={classes.featureButton}>
-              <SchoolOutlined style={{fontSize: 100}}/>
+              <SchoolOutlined style={{fontSize: 200}}/>
               <Typography variant="h5" className={classes.buttonText}>
                 Directory
               </Typography>
@@ -79,7 +79,7 @@ function Layout() {
             to="#"
           >
             <div className={classes.featureButton}>
-              <RoomOutlined style={{fontSize: 100}}/>    
+              <RoomOutlined style={{fontSize: 200}}/>    
               <Typography variant="h5" className={classes.buttonText}>
                 Alumni Map
               </Typography>
