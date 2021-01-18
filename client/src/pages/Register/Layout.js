@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Layout({auth, registerUser, error}) {
+function Layout({registerUser, error}) {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [userName, setUserName] = useState();
@@ -43,12 +43,6 @@ function Layout({auth, registerUser, error}) {
   const [confirmPassword, setConfirmPassword] = useState();
   const classes = useStyles();
   const history = useHistory();
-
-  useEffect(() => {
-    if(auth.isAuthenticated) {
-      history.push("/alumni/allalumni");
-    }
-  }, [auth.isAuthenticated, history])
 
   function submitHandler() {
     const user = {
@@ -173,7 +167,7 @@ function Layout({auth, registerUser, error}) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/#/login" variant="body2">
+              <Link href="/login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>

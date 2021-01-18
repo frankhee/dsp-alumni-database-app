@@ -38,13 +38,13 @@ function SearchBar({ handleSearch }) {
           onChange={(event) => setSearchText(event.target.value)}
           onKeyDown={(event) => {
             if(event.key === 'Enter'){
-              handleSearch(searchText);
+              handleSearch(searchText.toLowerCase());
             }
           }}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
-                onClick={() => handleSearch(searchText)}
+                onClick={() => handleSearch(searchText.toLowerCase())}
                 aria-label="submit-search"
               >
                 <SearchOutlined/>

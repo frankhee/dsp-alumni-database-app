@@ -13,13 +13,14 @@ import {
   makeStyles
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Fisher from '../../asset/Fisher.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco/v1459367456/vtc7qsbjog4u4wujiulk.png)',
+    backgroundImage: `url(${Fisher})`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -91,6 +92,11 @@ function Layout({auth, error, loginUser}) {
               autoFocus
               helperText={error.existing_identifier}
               onChange={(event) => setIdentifier(event.target.value)}
+              onKeyDown={(event) => {
+                if(event.key === 'Enter'){
+                  submitHandler();
+                }
+              }}
             />
             <TextField
               variant="outlined"
@@ -105,6 +111,11 @@ function Layout({auth, error, loginUser}) {
               autoComplete="current-password"
               helperText={error.existing_password}
               onChange={(event) => setPassWord(event.target.value)}
+              onKeyDown={(event) => {
+                if(event.key === 'Enter'){
+                  submitHandler();
+                }
+              }}
             />
             <Button
               fullWidth
@@ -117,7 +128,7 @@ function Layout({auth, error, loginUser}) {
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/#/register" variant="body2">
+                <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

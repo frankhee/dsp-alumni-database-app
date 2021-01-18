@@ -53,12 +53,13 @@ export const loginUser = (userData) => {
 };
 
 //Log user out
-export const logoutUser = () => {
+export const logoutUser = (history) => {
   return function(dispatch) {
     // Remove token from local storage
     localStorage.removeItem("jwtToken");
     // Remove auth header for future requests
     setAuthToken(false);
+    history.push("/login");
     dispatch(setCurrentUser({}));
   }
 };

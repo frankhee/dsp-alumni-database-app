@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { logoutUser } from '../../../store/actions/userActions'
 import { makeStyles } from '@material-ui/core/styles';
 import { AccountCircleRounded } from '@material-ui/icons';
@@ -56,6 +57,7 @@ const useStyle = makeStyles(() => ({
 function Header({ children, logoutUser }) {
   const classes = useStyle();
   const [anchorEl, setAnchorEl] = useState(null);
+  const history = useHistory();
 
 	const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -67,7 +69,7 @@ function Header({ children, logoutUser }) {
 
   const handleLogOut = () => {
     handleClose();
-    logoutUser();
+    logoutUser(history);
   }
 
   return (

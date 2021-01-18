@@ -1,5 +1,6 @@
 import { useEffect }  from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import jwt_decode from "jwt-decode";
 import { setAuthToken } from "../../services/api/HttpRequest";
@@ -7,6 +8,7 @@ import * as UserActions from "../../store/actions/userActions";
 
 //Check if user is authenticated
 function AuthHandler({ actions, auth }) {
+  const history = useHistory();
   useEffect(() => {
     // Check for token to keep user logged in
     if (localStorage.jwtToken) {
@@ -21,12 +23,12 @@ function AuthHandler({ actions, auth }) {
       const currentTime = Date.now() / 1000; // to get in milliseconds
       if (decoded.exp < currentTime) {
         // Logout user
-        actions.logoutUser();
+        actions.logoutUser(history);
         // Redirect to login
         window.location.href = "./login";
       }
     }
-  }, [actions, auth.isAuthenticated])
+  }, [actions, auth.isAuthenticated, history])
 
   return null;
 }

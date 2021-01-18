@@ -7,8 +7,8 @@ import RedirectPage from '../../services/authentication/Redirect';
 
 const useStyle = makeStyles(() => ({
   mainPageContainer: {
-    width: '100%',
-    height: '100%',
+    minWidth: '100vw',
+    minHeight: '100vh',
   },
 }));
 
@@ -17,7 +17,7 @@ function AppRoutes() {
   return (
     <div className={classes.mainPageContainer}>
       <Switch>
-        {/* <Route exact path="/" component={RedirectPage}/> */}
+        <Route exact path="/" component={RedirectPage}/>
         <Route exact path="/register" component={Register}/>
         <Route exact path="/login" component={Login}/>
         <PrivateRoute exact path="/home" component={Landing}/>

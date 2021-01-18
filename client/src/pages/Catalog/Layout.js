@@ -8,8 +8,9 @@ import { IceCream } from 'react-kawaii';
 
 const useStyles = makeStyles((theme) => ({
   pageContainer: {
-    width: "100%",
-    height: "100%",
+    minWidth: "100vw",
+    minHeight: "100vh",
+    backgroundColor: "#d8bfd8"
   },
   productContainer: {
     width: "100%",

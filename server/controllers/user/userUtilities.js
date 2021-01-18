@@ -105,7 +105,7 @@ function loginUser(req, res) {
             payload,
             secret,
             {
-              expiresIn: '1h'
+              expiresIn: '24h'
             },
             (err, token) => {
               res.json({

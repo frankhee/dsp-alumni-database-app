@@ -72,9 +72,9 @@ async function fetchAlumniPage(offset = null) {
   try {
     let response;
     if(offset) {
-      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?sort%5B0%5D%5Bfield%5D=Graduation_Date&sort%5B0%5D%5Bdirection%5D=desc&fields%5B%5D=First_Name&fields%5B%5D=Graduation_Date&fields%5B%5D=Last_Name&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=Information_Last_Updated&fields%5B%5D=LinkedIn&fields%5B%5D=Employer&pageSize=${pageSize}&offset=${offset}`);
+      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?sort%5B0%5D%5Bfield%5D=Graduation_Date&sort%5B0%5D%5Bdirection%5D=desc&fields%5B%5D=Graduation_Date&fields%5B%5D=Position&fields%5B%5D=Name&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=Information_Last_Updated&fields%5B%5D=LinkedIn&fields%5B%5D=Employer&pageSize=${pageSize}&offset=${offset}`);
     } else {
-      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?sort%5B0%5D%5Bfield%5D=Graduation_Date&sort%5B0%5D%5Bdirection%5D=desc&fields%5B%5D=First_Name&fields%5B%5D=Graduation_Date&fields%5B%5D=Last_Name&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=Information_Last_Updated&fields%5B%5D=LinkedIn&fields%5B%5D=Employer&pageSize=${pageSize}`);
+      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?sort%5B0%5D%5Bfield%5D=Graduation_Date&sort%5B0%5D%5Bdirection%5D=desc&fields%5B%5D=Graduation_Date&fields%5B%5D=Position&fields%5B%5D=Name&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=Information_Last_Updated&fields%5B%5D=LinkedIn&fields%5B%5D=Employer&pageSize=${pageSize}`);
     }
     const newOffset = response.data.offset;
     return [response.data.records, newOffset];
@@ -88,9 +88,9 @@ async function searchAlumniPage(searchInput, searchOffset = null) {
   try {
     let response;
     if(searchOffset) {
-      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?fields%5B%5D=First_Name&fields%5B%5D=Last_Name&fields%5B%5D=Graduation_Date&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Employer&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=LinkedIn&fields%5B%5D=Information_Last_Updated&filterByFormula=OR(Employer+%3D+'${searchInput}'%2C+City+%3D+'${searchInput}'%2C+First_Name+%3D+'${searchInput}'%2C+Last_Name+%3D+'${searchInput}'%2C+Graduation_Date+%3D+'${searchInput}'%2C+State+%3D+'${searchInput}'%2C+Name+%3D+'${searchInput}')&pageSize=16&sort%5B0%5D%5Bfield%5D=Graduation_Date&sort%5B0%5D%5Bdirection%5D=desc&offset=${searchOffset}`);
+      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?fields%5B%5D=Name&fields%5B%5D=Graduation_Date&fields%5B%5D=Position&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Employer&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=LinkedIn&fields%5B%5D=Information_Last_Updated&filterByFormula=OR(Employer+%3D+'${searchInput}'%2C+City+%3D+'${searchInput}'%2C+First_Name+%3D+'${searchInput}'%2C+Last_Name+%3D+'${searchInput}'%2C+Graduation_Date+%3D+'${searchInput}'%2C+State+%3D+'${searchInput}'%2C+Name+%3D+'${searchInput}')&pageSize=16&sort%5B0%5D%5Bfield%5D=Graduation_Date&sort%5B0%5D%5Bdirection%5D=desc&offset=${searchOffset}`);
     } else {
-      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?fields%5B%5D=First_Name&fields%5B%5D=Last_Name&fields%5B%5D=Graduation_Date&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Employer&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=LinkedIn&fields%5B%5D=Information_Last_Updated&filterByFormula=OR(Employer+%3D+'${searchInput}'%2C+City+%3D+'${searchInput}'%2C+First_Name+%3D+'${searchInput}'%2C+Last_Name+%3D+'${searchInput}'%2C+Graduation_Date+%3D+'${searchInput}'%2C+State+%3D+'${searchInput}'%2C+Name+%3D+'${searchInput}')&pageSize=16&sort%5B0%5D%5Bfield%5D=Graduation_Date&sort%5B0%5D%5Bdirection%5D=desc`);
+      response = await axios.get(`${process.env.AIRTABLE_BASE_URL}/Alumni?fields%5B%5D=Name&fields%5B%5D=Graduation_Date&fields%5B%5D=Position&fields%5B%5D=City&fields%5B%5D=State&fields%5B%5D=Employer&fields%5B%5D=Country&fields%5B%5D=Email&fields%5B%5D=LinkedIn&fields%5B%5D=Information_Last_Updated&filterByFormula=OR(Employer+%3D+'${searchInput}'%2C+City+%3D+'${searchInput}'%2C+First_Name+%3D+'${searchInput}'%2C+Last_Name+%3D+'${searchInput}'%2C+Graduation_Date+%3D+'${searchInput}'%2C+State+%3D+'${searchInput}'%2C+Name+%3D+'${searchInput}')&pageSize=16&sort%5B0%5D%5Bfield%5D=Graduation_Date&sort%5B0%5D%5Bdirection%5D=desc`);
     }
     const newSearchOffset = response.data.offset;
     return [response.data.records, newSearchOffset];

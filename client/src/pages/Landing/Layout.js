@@ -1,4 +1,4 @@
-import React from 'react';
+import { React } from 'react';
 import { NavLink } from "react-router-dom";
 import { makeStyles, Typography } from '@material-ui/core';
 import { SchoolOutlined, RoomOutlined }  from '@material-ui/icons';
@@ -55,8 +55,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Layout() {
+function Layout({auth}) {
   const classes = useStyles();
+
   return (
     <Header>
       <div className={classes.pageContainer}>
