@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import { createLogger } from "redux-logger";
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 import thunk from "redux-thunk";
@@ -23,13 +23,18 @@ function configureStore(initialState) {
   //*****************************************//
 
   //*******COMMENT OUT FOR DEVELOPMENT********//
-  const middlewareEnhancer = applyMiddleware(...middlewares); // add support for Redux dev tools
+  // const middlewareEnhancer = applyMiddleware(...middlewares); // add support for Redux dev tools
   //*****************************************//
 
   return createStore(
     rootReducer,
     initialState,
-    middlewareEnhancer
+    compose(
+      applyMiddleware(...middlewares),
+      window.__REDUX_DEVTOOLS_EXTENSION__
+        ? window.__REDUX_DEVTOOLS_EXTENSION__()
+        : f => f
+    )
   );
 }
 
