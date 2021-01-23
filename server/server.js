@@ -13,11 +13,6 @@ require('dotenv').config();
 // app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 //*****************************************//
 
-app.use(express.static('../client/build'));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve("../client", "build", "index.html"));
-});
 
 // Bodyparser middleware
 app.use(bodyParser.urlencoded({extended: false}));
@@ -30,6 +25,13 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.AIRTABLE_
 //API endpoints
 app.use("/api/users", users);
 app.use("/api/alumni", alumni);
+
+//*********COMMENT OUT FOR DEVELOPMENT*********//
+app.use(express.static('../client/build'));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve("../client", "build", "index.html"));
+});
+//*****************************************//
 
 //Listent to port
 const port = process.env.PORT || 5000;

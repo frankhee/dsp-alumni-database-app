@@ -5,23 +5,18 @@ import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 
 //Redux set up
-const initialState = {};
-const middlewares = [thunk];
+const middleware = [thunk];
 
 if (process.env.NODE_ENV === "development") {
   const logger = createLogger({
     collapsed: true,
   });
-  middlewares.push(logger);
-  middlewares.push(reduxImmutableStateInvariant());
+
+  middleware.push(logger);
+  middleware.push(reduxImmutableStateInvariant());
 }
-// const store = createStore(rootReducer, initialState, compose(
-//   applyMiddleware(...middlewares),
-//   window.__REDUX_DEVTOOLS_EXTENSION__
-//     ? window.__REDUX_DEVTOOLS_EXTENSION__()
-//     : f => f
-// ));
-function configureStore() {
+
+function configureStore(initialState) {
 
   //******COMMENT OUT FOR DEPLOYMENT*********//
   // const composeEnhancers =
@@ -29,18 +24,13 @@ function configureStore() {
   //*****************************************//
 
   //*******COMMENT OUT FOR DEVELOPMENT********//
-  // const middlewareEnhancer = applyMiddleware(...middlewares); // add support for Redux dev tools
+  const composeEnhancers = compose; // add support for Redux dev tools
   //*****************************************//
 
   return createStore(
     rootReducer,
     initialState,
-    compose(
-      applyMiddleware(...middlewares),
-      window.__REDUX_DEVTOOLS_EXTENSION__
-        ? window.__REDUX_DEVTOOLS_EXTENSION__()
-        : f => f
-    )
+    composeEnhancers(applyMiddleware(...middleware))
   );
 }
 
