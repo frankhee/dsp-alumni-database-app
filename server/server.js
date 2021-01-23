@@ -9,11 +9,11 @@ const app = express();
 require('dotenv').config();
 
 //*********COMMENT OUT FOR DEPLOY*********//
-const cors = require('cors');
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+// const cors = require('cors');
+// app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 //*****************************************//
 
-// app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Bodyparser middleware
 app.use(bodyParser.urlencoded({extended: false}));
