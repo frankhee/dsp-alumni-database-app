@@ -13,7 +13,7 @@ import {
  
 const useStyle = makeStyles(() => ({
   root: {
-    minWidth: 275,
+    minWidth: 300,
     height: 200,
     backgroundColor: '#9370db',
     color: '#9370db',
@@ -92,19 +92,19 @@ function AlumniCard({ id, alumnus }) {
         <div className={classes.topCard}></div>
         <div className={classes.basicContent}>
           <div className={classes.topLeftCard}>
-            <Typography style={{fontSize: 35, fontWeight: "bold"}}>
+            <Typography style={{fontSize: 25, fontWeight: "bold"}}>
               {alumnus.Name !== "n/a" && DataFormatServices.capitalizeWords(alumnus.Name)}
             </Typography>
           </div>
           <hr className={classes.divider}/>
           <div className={classes.bottomLeftCard}>
-            <Typography style={{fontSize: 20}}>
+            <Typography style={{fontSize: 15}}>
               {alumnus.Position !== "n/a" && DataFormatServices.capitalizeWords(alumnus.Position)}
             </Typography>
-            <Typography style={{fontSize: 20}}>
+            <Typography style={{fontSize: 15}}>
               {alumnus.Employer !== "n/a" && DataFormatServices.capitalizeWords(alumnus.Employer)}
             </Typography>
-            <Typography style={{fontSize: 20}}>
+            <Typography style={{fontSize: 15}}>
               {alumnus.Graduation_Date !== "n/a" && "Class of "+ alumnus.Graduation_Date}
             </Typography>
           </div>
