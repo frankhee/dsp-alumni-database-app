@@ -11,7 +11,7 @@ import axios from 'axios';
 //*******FOR DEPLOYMENT*******/
 //Initialize Axios instance
 const client = axios.create({
-  baseURL: "http://18.191.180.60/"
+  baseURL: "https://dsp-alumni-database.com/"
 });
 //*********************************/
 
