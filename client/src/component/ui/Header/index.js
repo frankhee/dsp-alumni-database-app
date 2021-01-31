@@ -2,20 +2,15 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { logoutUser } from '../../../store/actions/userActions'
-import { makeStyles } from '@material-ui/core/styles';
-import { AccountCircleRounded } from '@material-ui/icons';
-import { 
-  Typography, 
-  IconButton, 
-  Menu, 
-  MenuItem
-} from '@material-ui/core';
+import { logoutUser } from "../../../store/actions/userActions";
+import { makeStyles } from "@material-ui/core/styles";
+import { AccountCircleRounded } from "@material-ui/icons";
+import { Typography, IconButton, Menu, MenuItem } from "@material-ui/core";
 import PropTypes from "prop-types";
 
 const useStyle = makeStyles(() => ({
   headerBarContainer: {
-    backgroundColor: 'black',
+    backgroundColor: "black",
     borderRadius: "1px",
     border: "1px solid borderGrey",
     color: "white",
@@ -43,15 +38,15 @@ const useStyle = makeStyles(() => ({
     height: "100%",
   },
   title: {
-    marginLeft: 'auto'
+    marginLeft: "auto",
   },
   userButtons: {
-    color: 'white',
+    color: "white",
     fontSize: 50,
   },
   iconButton: {
-    marginLeft: 'auto'
-  }
+    marginLeft: "auto",
+  },
 }));
 
 function Header({ children, logoutUser }) {
@@ -59,7 +54,7 @@ function Header({ children, logoutUser }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const history = useHistory();
 
-	const handleClick = (event) => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -70,21 +65,18 @@ function Header({ children, logoutUser }) {
   const handleLogOut = () => {
     handleClose();
     logoutUser(history);
-  }
+  };
 
   return (
     <div className={classes.pageContainer}>
       <div className={classes.headerBarContainer}>
         <NavLink
-          style={{ textDecoration: 'none', color: 'white' }}
+          style={{ textDecoration: "none", color: "white" }}
           exact
           to="/home"
           className={classes.title}
         >
-          <Typography 
-            variant="h4" 
-            noWrap 
-          >
+          <Typography variant="h4" noWrap>
             DSP Alumni Database
           </Typography>
         </NavLink>
@@ -92,10 +84,8 @@ function Header({ children, logoutUser }) {
           aria-label="access-account"
           onClick={(event) => handleClick(event)}
           className={classes.iconButton}
-          >
-          <AccountCircleRounded 
-            className={classes.userButtons}
-          />
+        >
+          <AccountCircleRounded className={classes.userButtons} />
         </IconButton>
         <Menu
           id="simple-menu"
@@ -104,18 +94,30 @@ function Header({ children, logoutUser }) {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+          <MenuItem 
+            onClick={handleLogOut}
+          >
+            Logout
+          </MenuItem>
+          <a
+            style={{ textDecoration: 'none', color: 'black' }}
+            href="https://github.com/frankhee/dsp-alumni-database-app"
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <MenuItem>
+              View App Source
+            </MenuItem>
+          </a>
         </Menu>
       </div>
-      <div className={classes.mainBodyContainer}>
-        {children}
-      </div>
+      <div className={classes.mainBodyContainer}>{children}</div>
     </div>
   );
 }
 
 Header.propTypes = {
-  children: PropTypes.object
+  children: PropTypes.object,
 };
 
 export default connect(null, { logoutUser })(Header);
