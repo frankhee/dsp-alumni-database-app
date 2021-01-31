@@ -1,2 +1,2 @@
 # dsp-alumni-database-app
-Live Link: http://www.dsp-alumni-database.com
+Live Link: https://dsp-alumni-database.com/home
