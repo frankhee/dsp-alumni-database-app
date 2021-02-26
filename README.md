@@ -18,7 +18,7 @@ When I came to the United States in 2011, I knew very little English. Throughout
 ## Features
 
 * Ability to create an account and login with account credentials.
-* Ability to browse DSP alumni information including employer, position, email, and LinkedIn.
+* Ability to browse DSP alumni information including employer, position, and LinkedIn.
 * Ability to search for a specific alumnus/alumni group based on name, location, employer, and graduation date.
 
 ## Incoming Features
